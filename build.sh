@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -o errexit
+set -o pipefail
+
 # Version tag template: IMAGE_NAME-YYYY-MM-DD
 DATE=$(date +'%F')
 REPO=resin/rpi-raspbian:wheezy

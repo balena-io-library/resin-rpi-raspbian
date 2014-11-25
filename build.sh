@@ -10,10 +10,11 @@ REPO=resin/rpi-raspbian:wheezy
 # Create temp image before squashing
 docker build --tag $REPO-temp .
 
-docker run -t -i --name=temp $REPO-temp echo
-docker export temp | docker import - $REPO
+CONTAINER=$(docker run -d $REPO-temp echo)
+docker export $CONTAINER | docker import - $REPO
 
-# Remove temp image
+# Remove temp image and container
+docker rm -f $CONTAINER
 docker rmi -f $REPO-temp
 
 docker tag $REPO $REPO-$DATE

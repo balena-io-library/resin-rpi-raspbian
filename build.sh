@@ -17,7 +17,7 @@ docker export $CONTAINER | docker import - $REPO
 docker rm -f $CONTAINER
 docker rmi -f $REPO-temp
 
-docker tag $REPO $REPO-$DATE
+docker tag -f $REPO $REPO-$DATE
 
 # Push the images
 docker push $REPO

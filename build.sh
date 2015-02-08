@@ -1,24 +1,21 @@
 #!/bin/bash
 
 set -o errexit
-set -o pipefail
 
-# Version tag template: IMAGE_NAME-YYYY-MM-DD
-DATE=$(date +'%F')
-REPO=resin/rpi-raspbian:wheezy
+SUITES='wheezy jessie'
+MIRROR='http://archive.raspbian.org/raspbian'
+REPO='resin/rpi-raspbian'
 
-# Create temp image before squashing
-docker build --tag $REPO-temp .
-
-CONTAINER=$(docker run -d $REPO-temp echo)
-docker export $CONTAINER | docker import - $REPO
-
-# Remove temp image and container
-docker rm -f $CONTAINER
-docker rmi -f $REPO-temp
-
-docker tag -f $REPO $REPO-$DATE
-
-# Push the images
-docker push $REPO
-docker push $REPO-$DATE
+for suite in $SUITES; do
+	dir=$(mktemp --tmpdir=/var/tmp -d)
+	date=$(date +'%F')
+	
+	mkdir -p $dir/rootfs/usr/bin
+	cp qemu-arm-static $dir/rootfs/usr/bin
+	chmod +x $dir/rootfs/usr/bin/qemu-arm-static
+	
+	./mkimage.sh -t $REPO:$suite --dir=$dir debootstrap --variant=minbase --keyring=/root/.gnupg/pubring.gpg --arch=armhf $suite $MIRROR
+	rm -rf $dir
+	
+	docker tag -f $REPO:$suite $REPO:$suite-$date
+done

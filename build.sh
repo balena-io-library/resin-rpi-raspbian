@@ -14,7 +14,7 @@ for suite in $SUITES; do
 	cp qemu-arm-static $dir/rootfs/usr/bin
 	chmod +x $dir/rootfs/usr/bin/qemu-arm-static
 	
-	./mkimage.sh -t $REPO:$suite --dir=$dir debootstrap --variant=minbase --keyring=/root/.gnupg/pubring.gpg --arch=armhf $suite $MIRROR
+	./mkimage.sh -t $REPO:$suite --dir=$dir debootstrap --variant=minbase --keyring=/root/.gnupg/pubring.gpg --arch=armhf --include=sudo $suite $MIRROR
 	rm -rf $dir
 	
 	docker tag -f $REPO:$suite $REPO:$suite-$date

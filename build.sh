@@ -5,6 +5,7 @@ set -o errexit
 SUITES='wheezy jessie'
 MIRROR='http://archive.raspbian.org/raspbian'
 REPO='resin/rpi-raspbian'
+LATEST='jessie'
 
 for suite in $SUITES; do
 	dir=$(mktemp --tmpdir=/var/tmp -d)
@@ -18,4 +19,7 @@ for suite in $SUITES; do
 	rm -rf $dir
 	
 	docker tag -f $REPO:$suite $REPO:$suite-$date
+	if [ $LATEST == $suite ]; then
+		docker tag -f $REPO:$suite $REPO:latest
+	fi
 done

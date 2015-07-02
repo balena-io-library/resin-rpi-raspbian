@@ -1,5 +1,7 @@
 FROM debian:jessie
 
+RUN echo "deb http://http.debian.net/debian jessie-backports main"  >> /etc/apt/sources.list
+
 RUN apt-get -q update \
 	&& apt-get -qy install \
 		curl \

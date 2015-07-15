@@ -83,6 +83,7 @@ echo >&2 "+ cat > '$dir/Dockerfile'"
 cat > "$dir/Dockerfile" <<'EOF'
 FROM scratch
 ADD rootfs.tar.xz /
+ENV LC_ALL C.UTF-8
 EOF
 
 # if our generated image has a decent shell, let's set a default command

@@ -17,7 +17,7 @@ for suite in $SUITES; do
 	
 	./mkimage.sh -t $REPO:$suite --dir=$dir debootstrap --variant=minbase --keyring=/root/.gnupg/pubring.gpg --arch=armhf --include=sudo $suite $MIRROR
 	rm -rf $dir
-	
+
 	docker tag -f $REPO:$suite $REPO:$suite-$date
 	if [ $LATEST == $suite ]; then
 		docker tag -f $REPO:$suite $REPO:latest

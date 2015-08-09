@@ -84,6 +84,7 @@ cat > "$dir/Dockerfile" <<'EOF'
 FROM scratch
 ADD rootfs.tar.xz /
 ENV LC_ALL C.UTF-8
+ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 EOF
 
 # if our generated image has a decent shell, let's set a default command

@@ -9,7 +9,7 @@ LATEST='jessie'
 
 for suite in $SUITES; do
 	dir=$(mktemp --tmpdir=/var/tmp -d)
-	date=$(date +'%F')
+	date=$(date +'%Y%m%d' -u)
 	
 	mkdir -p $dir/rootfs/usr/bin
 	cp qemu-arm-static $dir/rootfs/usr/bin

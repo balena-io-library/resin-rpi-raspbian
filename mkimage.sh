@@ -71,6 +71,13 @@ nameserver 8.8.8.8
 nameserver 8.8.4.4
 EOF
 
+# clean up unnecessary stuff (docs, locales...)
+find "$rootfsDir/usr/share/doc" -depth -type f ! -name copyright|xargs rm || true
+find "$rootfsDir/usr/share/doc" -empty|xargs rmdir || true
+find "$rootfsDir/usr/share/locale/"* -depth -type d ! -name en*|xargs rm -rf || true
+rm -rf "$rootfsDir/usr/share/man/*" "$rootfsDir/usr/share/groff/*" "$rootfsDir/usr/share/info/*"
+rm -rf "$rootfsDir/usr/share/lintian/*" "$rootfsDir/usr/share/linda/*" "$rootfsDir/var/cache/man/*"
+
 tarFile="$dir/rootfs.tar.xz"
 touch "$tarFile"
 
@@ -79,10 +86,14 @@ touch "$tarFile"
 	tar --numeric-owner -caf "$tarFile" -C "$rootfsDir" --transform='s,^./,,' .
 )
 
+cp -f 01_nodoc 01_buildconfig 02_nocache_compress-indexes "$dir/"
+
 echo >&2 "+ cat > '$dir/Dockerfile'"
 cat > "$dir/Dockerfile" <<'EOF'
 FROM scratch
 ADD rootfs.tar.xz /
+COPY 01_nodoc /etc/dpkg/dpkg.cfg.d/
+COPY 01_buildconfig 02_nocache_compress-indexes /etc/apt/apt.conf.d/
 ENV LC_ALL C.UTF-8
 ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ENV DEBIAN_FRONTEND noninteractive

@@ -1,0 +1,6 @@
+Dir::Cache {
+  srcpkgcache "";
+  pkgcache "";
+}
+Acquire::GzipIndexes "true";
+Acquire::CompressionTypes::Order:: "gz";

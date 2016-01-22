@@ -98,7 +98,7 @@ ENV LC_ALL C.UTF-8
 ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ENV DEBIAN_FRONTEND noninteractive
 LABEL io.resin.architecture="rpi" \
-	  io.resin.qemu.version="2.5.0-resin" \
+	  io.resin.qemu.version="$QEMU_VERSION" \
 	  io.resin.device-type="raspberrypi"
 EOF
 

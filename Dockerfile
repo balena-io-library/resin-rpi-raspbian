@@ -9,6 +9,7 @@ RUN apt-get -q update \
 		debootstrap \
 		python \
 		python-pip \
+		ca-certificates \
 	&& rm -rf /var/lib/apt/lists/*
 
 RUN pip install awscli

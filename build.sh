@@ -7,6 +7,11 @@ MIRROR='http://archive.raspbian.org/raspbian'
 REPO='resin/rpi-raspbian'
 LATEST='jessie'
 
+curl -SLO https://github.com/resin-io/qemu/releases/download/$QEMU_VERSION/qemu-$QEMU_VERSION.tar.gz \
+	&& echo "$QEMU_SHA256  qemu-$QEMU_VERSION.tar.gz" > qemu-$QEMU_VERSION.tar.gz.sha256sum \
+	&& sha256sum -c qemu-$QEMU_VERSION.tar.gz.sha256sum \
+	&& tar -xz --strip-components=1 -f qemu-$QEMU_VERSION.tar.gz
+
 for suite in $SUITES; do
 	dir=$(mktemp --tmpdir=/var/tmp -d)
 	date=$(date +'%Y%m%d' -u)

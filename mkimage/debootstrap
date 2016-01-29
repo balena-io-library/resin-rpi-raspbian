@@ -21,6 +21,7 @@ shift
 (
 	set -x
 	$DEBOOTSTRAP "${before[@]}" "$suite" "$rootfsDir" "$@"
+	chroot "$rootfsDir" ./debootstrap/debootstrap --second-stage
 )
 
 # now for some Docker-specific tweaks

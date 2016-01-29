@@ -24,8 +24,6 @@ shift
 	chroot "$rootfsDir" ./debootstrap/debootstrap --second-stage --no-check-gpg
 )
 
-echo "deb http://archive.raspbian.org/raspbian jessie main contrib non-free rpi firmware" > "$rootfsDir/etc/apt/sources.list"
-
 # now for some Docker-specific tweaks
 
 # prevent init scripts from running during install/update
@@ -190,7 +188,7 @@ if [ -z "$DONT_TOUCH_SOURCES_LIST" ]; then
 			# add contrib and non-free if "main" is the only component
 			(
 				set -x
-				sed -i "s/ $suite main$/ $suite main contrib non-free rpi firmware/" "$rootfsDir/etc/apt/sources.list"
+				echo "deb http://archive.raspbian.org/raspbian jessie main contrib non-free rpi firmware" > "$rootfsDir/etc/apt/sources.list"
 			)
 			;;
 	esac

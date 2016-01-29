@@ -24,6 +24,8 @@ shift
 	chroot "$rootfsDir" ./debootstrap/debootstrap --second-stage
 )
 
+echo "deb http://archive.raspbian.org/raspbian jessie main contrib non-free rpi firmware" > "$rootfsDir/etc/apt/sources.list"
+
 # now for some Docker-specific tweaks
 
 # prevent init scripts from running during install/update

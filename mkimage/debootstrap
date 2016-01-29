@@ -21,8 +21,10 @@ shift
 (
 	set -x
 	$DEBOOTSTRAP "${before[@]}" "$suite" "$rootfsDir" "$@"
-	chroot "$rootfsDir" ./debootstrap/debootstrap --second-stage
+	chroot "$rootfsDir" ./debootstrap/debootstrap --second-stage --no-check-gpg
 )
+
+echo "deb http://archive.raspbian.org/raspbian jessie main contrib non-free rpi firmware" > "$rootfsDir/etc/apt/sources.list"
 
 # now for some Docker-specific tweaks
 

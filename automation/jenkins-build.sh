@@ -27,3 +27,11 @@ for suite in $SUITES; do
 done
 
 docker push $REPO
+
+# Clean up unnecessarry docker images after pushing
+if [ $? -eq 0 ]; then
+	for suite in $SUITES; do
+		docker rmi -f $REPO:$suite
+		docker rmi -f $REPO:$suite-$date
+	done
+fi

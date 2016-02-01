@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -o errexit
+set -o pipefail
+
 export SUITES='wheezy jessie'
 export REPO='resin/rpi-raspbian'
 LATEST='jessie'

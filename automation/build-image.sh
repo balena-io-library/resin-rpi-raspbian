@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -o errexit
+set -o pipefail
+
 QEMU_VERSION='2.5.0-resin-rc1'
 QEMU_SHA256='8db1c7525848072974580b2e1c79797fc995fd299ee2e4214631574023589782'
 MIRROR='http://archive.raspbian.org/raspbian'

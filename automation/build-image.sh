@@ -22,7 +22,7 @@ for suite in $SUITES; do
 	docker run --rm --privileged	-e REPO=$REPO \
 									-e SUITE=$suite \
 									-e MIRROR=$MIRROR \
-									-e QEMU_VERSION=$QEMU_VERSION \
+									-e RESIN_QEMU_VERSION=$QEMU_VERSION \
 									-v `pwd`/output:/output raspbian-mkimage
 
 	docker build -t $REPO:$suite output/

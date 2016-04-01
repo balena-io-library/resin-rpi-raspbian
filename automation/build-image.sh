@@ -3,8 +3,8 @@
 set -o errexit
 set -o pipefail
 
-QEMU_VERSION='2.5.0-resin-rc4'
-QEMU_SHA256='81e955d4a8d501b5d9adcd2c8fe4cc4f31e82f2b4598f9ad6a14296ca9959c02'
+QEMU_VERSION='2.5.0-resin-rc3'
+QEMU_SHA256='dc36002fd3e362710e1654c4dfdc84a064b710e10a2323e8e4c8e24cb3921818'
 MIRROR='http://archive.raspbian.org/raspbian'
 
 # Download QEMU

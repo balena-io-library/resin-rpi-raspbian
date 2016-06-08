@@ -86,7 +86,7 @@ touch "$tarFile"
 	tar --numeric-owner -caf "$tarFile" -C "$rootfsDir" --transform='s,^./,,' .
 )
 
-cp -f 01_nodoc 01_buildconfig "$dir/"
+cp -f 01_nodoc 01_buildconfig resin-pinning "$dir/"
 
 echo >&2 "+ cat > '$dir/Dockerfile'"
 cat > "$dir/Dockerfile" <<EOF
@@ -94,6 +94,7 @@ FROM scratch
 ADD rootfs.tar.xz /
 COPY 01_nodoc /etc/dpkg/dpkg.cfg.d/
 COPY 01_buildconfig /etc/apt/apt.conf.d/
+COPY resin-pinning /etc/apt/preferences.d/
 ENV LC_ALL C.UTF-8
 ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ENV DEBIAN_FRONTEND noninteractive

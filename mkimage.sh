@@ -88,20 +88,13 @@ touch "$tarFile"
 
 cp -f 01_nodoc 01_buildconfig resin-pinning "$dir/"
 
-echo >&2 "+ cat > '$dir/Dockerfile'"
-cat > "$dir/Dockerfile" <<EOF
-FROM scratch
-ADD rootfs.tar.xz /
-COPY 01_nodoc /etc/dpkg/dpkg.cfg.d/
-COPY 01_buildconfig /etc/apt/apt.conf.d/
-COPY resin-pinning /etc/apt/preferences.d/
-ENV LC_ALL C.UTF-8
-ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-ENV DEBIAN_FRONTEND noninteractive
-LABEL io.resin.architecture="rpi" \
-	  io.resin.qemu.version="$RESIN_QEMU_VERSION" \\
-	  io.resin.device-type="raspberrypi"
-EOF
+if [ $SUITE == 'wheezy' ]; then
+	mv Dockerfile.no-systemd "$dir/Dockerfile"
+	cp entry-nosystemd.sh "$dir/entry.sh"
+else
+	mv Dockerfile.systemd "$dir/Dockerfile"
+	cp entry.sh launch.service "$dir/"
+fi
 
 # if our generated image has a decent shell, let's set a default command
 for shell in /bin/bash /usr/bin/fish /usr/bin/zsh /bin/sh; do

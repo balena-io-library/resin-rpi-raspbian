@@ -205,5 +205,7 @@ fi
 	# this forces "apt-get update" in dependent images, which is also good
 	echo "deb http://resin-packages.s3-website-us-east-1.amazonaws.com/raspbian resin main" >> "$rootfsDir/etc/apt/sources.list.d/resin.list"
 	chroot "$rootfsDir" bash -c 'apt-key adv --keyserver pgp.mit.edu --recv-keys 0x4404DDEE92BF1079'
+	echo "deb http://archive.raspberrypi.org/debian $suite main" >>  "$rootfsDir/etc/apt/sources.list.d/raspi.list"
+	chroot "$rootfsDir" bash -c 'apt-key adv --keyserver pgp.mit.edu  --recv-key 0x82B129927FA3303E'
 	mkdir "$rootfsDir/var/lib/apt/lists/partial" # Lucid... "E: Lists directory /var/lib/apt/lists/partial is missing."
 )

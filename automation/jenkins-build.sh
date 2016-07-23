@@ -12,7 +12,7 @@ date=$(date +'%Y%m%d' -u)
 bash "$dir/build-image.sh"
 for suite in $SUITES; do
 	
-	docker run --rm $REPO:$suite bash -c 'dpkg-query -l' > $suite
+	docker run --rm $REPO:$suite dpkg-query -l > $suite
 
 	# Upload to S3 (using AWS CLI)
 	printf "$ACCESS_KEY\n$SECRET_KEY\n$REGION_NAME\n\n" | aws configure

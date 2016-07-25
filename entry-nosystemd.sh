@@ -32,13 +32,12 @@ function mount_dev()
 
 function init_non_systemd()
 {
-	
 	udevd & 
 	udevadm trigger &> /dev/null
 	
-	CMD=$(which $1)
+	CMD=$(which "$1")
 	# echo error message, when executable file doesn't exist.
-	if [  $? == '0' ]; then
+	if [ $? == '0' ]; then
 		shift
 		exec "$CMD" "$@"
 	else
@@ -53,4 +52,4 @@ if [ ! -z "$RESIN_SUPERVISOR_API_KEY" ] && [ ! -z "$RESIN_DEVICE_UUID" ]; then
 	mount_dev
 fi 
 
-init_non_systemd $@
+init_non_systemd "$@"

@@ -10,6 +10,8 @@ LABEL io.resin.architecture="rpi" \
 	  io.resin.qemu.version="$RESIN_QEMU_VERSION" \
 	  io.resin.device-type="raspberrypi"
 
+ENV QEMU_CPU arm1176
+
 # Install Systemd
 ENV container docker
 

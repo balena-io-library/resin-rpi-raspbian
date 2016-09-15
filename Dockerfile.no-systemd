@@ -10,6 +10,8 @@ LABEL io.resin.architecture="rpi" \
 	  io.resin.qemu.version="$RESIN_QEMU_VERSION" \
 	  io.resin.device-type="raspberrypi"
 
+ENV QEMU_CPU arm1176
+
 ONBUILD RUN echo $'WARNING: Systemd is not available on this base image! \nSystemd was included in Debian wheezy as a technology preview. Therefore, we do not install systemd on wheezy images and INITSYSTEM will not work.'
 
 COPY entry.sh /usr/bin/entry.sh

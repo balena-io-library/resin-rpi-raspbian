@@ -1,8 +1,10 @@
 #!/bin/bash
 
+set -m
+
 function start_udev()
 {
-	udevd & 
+	udevd &
 	udevadm trigger &> /dev/null
 }
 
@@ -79,10 +81,8 @@ function init_non_systemd()
 			# run this on resin device only
 			start_udev
 		fi
-		
 		"$CMD" "$@" &
 		pid=$!
-		wait $pid
 		fg &> /dev/null
 	else
 		echo "Command not found: $1"

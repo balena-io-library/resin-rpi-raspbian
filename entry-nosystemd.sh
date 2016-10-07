@@ -37,6 +37,7 @@ function mount_dev()
 
 function init_non_systemd()
 {
+	
 	udevd & 
 	udevadm trigger &> /dev/null
 	
@@ -52,7 +53,6 @@ function init_non_systemd()
 }
 
 remove_buildtime_env_var
-
 if [ ! -z "$RESIN_SUPERVISOR_API_KEY" ] && [ ! -z "$RESIN_DEVICE_UUID" ]; then
 	# run this on resin device only
 	update_hostname

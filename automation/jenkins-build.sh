@@ -21,12 +21,12 @@ for suite in $SUITES; do
 	aws s3 cp $suite s3://$BUCKET_NAME/image_info/rpi-raspbian/$suite/$suite_$date
 	rm -f $suite 
 
-	docker tag -f $REPO:$suite $ALIAS_REPO:$suite
-	docker tag -f $REPO:$suite $REPO:$suite-$date
-	docker tag -f $ALIAS_REPO:$suite $ALIAS_REPO:$suite-$date
+	docker tag $REPO:$suite $ALIAS_REPO:$suite
+	docker tag $REPO:$suite $REPO:$suite-$date
+	docker tag $ALIAS_REPO:$suite $ALIAS_REPO:$suite-$date
 	if [ $LATEST == $suite ]; then
-		docker tag -f $REPO:$suite $REPO:latest
-		docker tag -f $ALIAS_REPO:$suite $ALIAS_REPO:latest
+		docker tag $REPO:$suite $REPO:latest
+		docker tag $ALIAS_REPO:$suite $ALIAS_REPO:latest
 	fi
 done
 

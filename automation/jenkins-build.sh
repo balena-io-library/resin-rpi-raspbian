@@ -5,7 +5,7 @@ set -o pipefail
 
 export SUITES='wheezy jessie'
 export REPO='resin/rpi-raspbian'
-ALIAS_REPO='resin/raspberrypi-debian'
+ALIAS_REPO='resin/raspberry-pi-debian'
 LATEST='jessie'
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 date=$(date +'%Y%m%d' -u)

@@ -5,12 +5,17 @@ function remove_buildtime_env_var()
 	unset QEMU_CPU
 }
 
+# On ResinOS 2.x devices, the hostname is set by the hostOS.
+# For backward compatibility, we only update the hostname for ResinOS 1.x devices.
 function update_hostname()
 {
-	HOSTNAME="$HOSTNAME-${RESIN_DEVICE_UUID:0:7}"
-	echo $HOSTNAME > /etc/hostname
-	echo "127.0.1.1 $HOSTNAME" >> /etc/hosts
-	hostname "$HOSTNAME"
+	if [ ${RESIN_DEVICE_UUID:0:7} != ${HOSTNAME:0:7} ]; then
+		# For 1.x Devices only.
+		HOSTNAME="$RESIN_DEVICE_TYPE-${RESIN_DEVICE_UUID:0:7}"
+		echo $HOSTNAME > /etc/hostname
+		echo "127.0.1.1 $HOSTNAME" >> /etc/hosts
+		hostname "$HOSTNAME"
+	fi
 }
 
 function mount_dev()
@@ -53,6 +58,15 @@ function init_non_systemd()
 }
 
 remove_buildtime_env_var
+
+INITSYSTEM=$(echo "$INITSYSTEM" | awk '{print tolower($0)}')
+
+case "$INITSYSTEM" in
+	'1' | 'true')
+		INITSYSTEM='on'
+	;;
+esac
+
 if [ ! -z "$RESIN_SUPERVISOR_API_KEY" ] && [ ! -z "$RESIN_DEVICE_UUID" ]; then
 	# run this on resin device only
 	update_hostname

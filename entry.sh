@@ -8,11 +8,6 @@ function start_udev()
 	udevadm trigger &> /dev/null
 }
 
-function remove_buildtime_env_var()
-{
-	unset QEMU_CPU
-}
-
 # Send SIGTERM to child processes of PID 1.
 function signal_handler()
 {
@@ -96,8 +91,6 @@ function init_non_systemd()
 		exit 1
 	fi
 }
-
-remove_buildtime_env_var
 
 INITSYSTEM=$(echo "$INITSYSTEM" | awk '{print tolower($0)}')
 

@@ -1,10 +1,5 @@
 #!/bin/bash
 
-function remove_buildtime_env_var()
-{
-	unset QEMU_CPU
-}
-
 # On ResinOS 2.x devices, the hostname is set by the hostOS.
 # For backward compatibility, we only update the hostname for ResinOS 1.x devices.
 function update_hostname()
@@ -56,8 +51,6 @@ function init_non_systemd()
 		exit 1
 	fi
 }
-
-remove_buildtime_env_var
 
 INITSYSTEM=$(echo "$INITSYSTEM" | awk '{print tolower($0)}')
 

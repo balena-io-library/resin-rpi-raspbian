@@ -3,6 +3,13 @@ ADD rootfs.tar.xz /
 COPY 01_nodoc /etc/dpkg/dpkg.cfg.d/
 COPY 01_buildconfig /etc/apt/apt.conf.d/
 COPY resin-pinning /etc/apt/preferences.d/
+COPY resin-xbuild /usr/bin/
+COPY entry.sh /usr/bin/entry.sh    
+COPY launch.service /etc/systemd/system/launch.service
+
+RUN mkdir -p /usr/share/man/man1
+RUN ln -s resin-xbuild /usr/bin/cross-build-start \
+    && ln -s resin-xbuild /usr/bin/cross-build-end
 ENV LC_ALL C.UTF-8
 ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ENV DEBIAN_FRONTEND noninteractive
@@ -28,9 +35,6 @@ RUN systemctl mask \
 
     getty.target \
     graphical.target  
-
-COPY entry.sh /usr/bin/entry.sh    
-COPY launch.service /etc/systemd/system/launch.service
 
 RUN systemctl enable /etc/systemd/system/launch.service
 

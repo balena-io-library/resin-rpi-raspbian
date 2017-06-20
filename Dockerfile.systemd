@@ -9,6 +9,16 @@ COPY launch.service /etc/systemd/system/launch.service
 RUN mkdir -p /usr/share/man/man1
 RUN ln -s resin-xbuild /usr/bin/cross-build-start \
     && ln -s resin-xbuild /usr/bin/cross-build-end
+
+# Tini
+ENV TINI_VERSION 0.14.0
+RUN curl -SLO "http://resin-packages.s3.amazonaws.com/tini/v$TINI_VERSION/tini0.14.0.linux-armv6hf.tar.gz" \
+    && echo "0556dce389e01382ae6661afc53ea18fcf3ef195eee4e75b24a4e965571375f3  tini0.14.0.linux-armv6hf.tar.gz" | sha256sum -c - \
+    && tar -xzf "tini0.14.0.linux-armv6hf.tar.gz" \
+    && rm "tini0.14.0.linux-armv6hf.tar.gz" \
+    && chmod +x tini \
+    && mv tini /sbin/tini
+
 ENV LC_ALL C.UTF-8
 ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ENV DEBIAN_FRONTEND noninteractive

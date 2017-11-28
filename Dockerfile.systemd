@@ -29,6 +29,12 @@ LABEL io.resin.architecture="rpi" \
 ENV QEMU_CPU arm1176
 
 # Install Systemd
+
+RUN apt-get update && apt-get install --no-install-recommends \
+        systemd \
+        systemd-sysv \
+    && rm -rf /var/lib/apt/lists/*
+
 ENV container docker
 
 # We never want these to run in a container

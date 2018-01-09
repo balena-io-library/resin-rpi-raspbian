@@ -3,7 +3,7 @@
 set -o errexit
 set -o pipefail
 
-export SUITES='wheezy jessie stretch'
+export SUITES='wheezy jessie stretch buster'
 export REPO='resin/rpi-raspbian'
 ALIAS_REPO='resin/raspberry-pi-debian'
 LATEST='jessie'

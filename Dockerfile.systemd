@@ -22,6 +22,8 @@ RUN curl -SLO "http://resin-packages.s3.amazonaws.com/tini/v$TINI_VERSION/tini0.
 ENV LC_ALL C.UTF-8
 ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ENV DEBIAN_FRONTEND noninteractive
+# For backward compatibility, udev is enabled by default
+ENV UDEV on
 LABEL io.resin.architecture="rpi" \
 	  io.resin.qemu.version="$RESIN_QEMU_VERSION" \
 	  io.resin.device-type="raspberrypi"

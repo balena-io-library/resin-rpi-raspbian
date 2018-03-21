@@ -93,8 +93,12 @@ case "$SUITE" in
 	mv Dockerfile.no-systemd "$dir/Dockerfile"
 	cp entry-nosystemd.sh "$dir/entry.sh"
 ;;
-*) # jessie stretch buster
+'jessie')
 	mv Dockerfile.systemd "$dir/Dockerfile"
+	cp entry.sh launch.service "$dir/"
+;;
+*) # stretch buster
+	mv Dockerfile.v230.systemd "$dir/Dockerfile"
 	cp entry.sh launch.service "$dir/"
 ;;
 esac

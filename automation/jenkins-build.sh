@@ -3,9 +3,27 @@
 set -o errexit
 set -o pipefail
 
+function push_to_aliases(){
+	# $1: suite
+
+	for alias in $ALIASES; do
+		docker tag $REPO:$1 $alias:$1
+		docker tag $alias:$1 $alias:$1-$date
+
+		if [ $LATEST == $1 ]; then
+			docker tag $alias:$1 $alias:latest
+		fi
+
+		docker push $alias
+		docker rmi -f $alias:$1
+		docker rmi -f $alias:$1-$date
+		docker rmi -f $alias:latest || true
+	done
+}
+
 export SUITES='wheezy jessie stretch buster'
 export REPO='resin/rpi-raspbian'
-ALIAS_REPO='resin/raspberry-pi-debian'
+ALIASES='resin/raspberry-pi-debian resin/rpi-debian'
 LATEST='jessie'
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 date=$(date +'%Y%m%d' -u)
@@ -21,24 +39,22 @@ for suite in $SUITES; do
 	aws s3 cp $suite s3://$BUCKET_NAME/image_info/rpi-raspbian/$suite/$suite_$date
 	rm -f $suite 
 
-	docker tag $REPO:$suite $ALIAS_REPO:$suite
 	docker tag $REPO:$suite $REPO:$suite-$date
-	docker tag $ALIAS_REPO:$suite $ALIAS_REPO:$suite-$date
+
 	if [ $LATEST == $suite ]; then
 		docker tag $REPO:$suite $REPO:latest
-		docker tag $ALIAS_REPO:$suite $ALIAS_REPO:latest
 	fi
+
+	push_to_aliases $suite
 done
 
 docker push $REPO
-docker push $ALIAS_REPO
 
 # Clean up unnecessarry docker images after pushing
 if [ $? -eq 0 ]; then
 	for suite in $SUITES; do
 		docker rmi -f $REPO:$suite
 		docker rmi -f $REPO:$suite-$date
-		docker rmi -f $ALIAS_REPO:$suite
-		docker rmi -f $ALIAS_REPO:$suite-$date
+		docker rmi -f $REPO:latest || true
 	done
 fi

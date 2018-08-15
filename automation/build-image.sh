@@ -3,8 +3,8 @@
 set -o errexit
 set -o pipefail
 
-QEMU_VERSION='2.9.0.resin1-arm'
-QEMU_SHA256='b39d6a878c013abb24f4cccc7c3a79829546ae365069d5712142a4ad21bcb91b'
+QEMU_VERSION='qemu-3.0.0+resin-arm'
+QEMU_SHA256='47ae430b0e7c25e1bde290ac447a720e2ea6c6e78cd84e44847edda289e020a8'
 RESIN_XBUILD_VERSION='1.0.0'
 RESIN_XBUILD_SHA256='1eb099bc3176ed078aa93bd5852dbab9219738d16434c87fc9af499368423437'
 MIRROR='http://archive.raspbian.org/raspbian'

@@ -10,6 +10,8 @@ RUN mkdir -p /usr/share/man/man1
 RUN ln -s resin-xbuild /usr/bin/cross-build-start \
     && ln -s resin-xbuild /usr/bin/cross-build-end
 
+ONBUILD RUN echo 'WARNING: resin base images is now deprecated!\nAll base images are moved to new namespace "balenalib". Please check our docs(https://www.balena.io/docs) or new dockerhub namespace(https://hub.docker.com/u/balenalib/) for more details.'
+
 # Tini
 ENV TINI_VERSION 0.14.0
 RUN curl -SLO "http://resin-packages.s3.amazonaws.com/tini/v$TINI_VERSION/tini0.14.0.linux-armv6hf.tar.gz" \

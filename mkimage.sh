@@ -86,22 +86,10 @@ touch "$tarFile"
 	tar --numeric-owner -caf "$tarFile" -C "$rootfsDir" --transform='s,^./,,' .
 )
 
-cp -f 01_nodoc resin-pinning 01_buildconfig "$dir/"
+mv Dockerfile.rpi "$dir/Dockerfile"
+cp entry.sh "$dir/entry.sh"
 
-case "$SUITE" in
-'wheezy')
-	mv Dockerfile.no-systemd "$dir/Dockerfile"
-	cp entry-nosystemd.sh "$dir/entry.sh"
-;;
-'jessie')
-	mv Dockerfile.systemd "$dir/Dockerfile"
-	cp entry.sh launch.service "$dir/"
-;;
-*) # stretch buster
-	mv Dockerfile.v230.systemd "$dir/Dockerfile"
-	cp entry.sh launch.service "$dir/"
-;;
-esac
+cp -f 01_nodoc 01_buildconfig "$dir/"
 
 # if our generated image has a decent shell, let's set a default command
 for shell in /bin/bash /usr/bin/fish /usr/bin/zsh /bin/sh; do

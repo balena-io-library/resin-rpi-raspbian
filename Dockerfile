@@ -11,7 +11,7 @@ RUN apt-get -q update \
 
 RUN pip install awscli
 
-RUN gpg --recv-keys --keyserver pgp.mit.edu 0x9165938D90FDDD2E
+RUN gpg --recv-keys --keyserver ha.pool.sks-keyservers.net 0x9165938D90FDDD2E
 
 COPY . /usr/src/mkimage
 

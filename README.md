@@ -14,7 +14,7 @@ balenalib/rpi-raspbian is built weekly from this repository. For more details ab
 
 If you're having any problem, please [raise an issue][issue-tracker] on GitHub.
 
-[rpi-dockerhub-link]:https://registry.hub.docker.com/u/balena/rpi-raspbian/
+[rpi-dockerhub-link]:https://registry.hub.docker.com/u/balenalib/rpi-raspbian/
 [balena-base-images]:https://www.balena.io/docs
 [source-code]:https://github.com/balena-io-library/resin-rpi-raspbian
 [issue-tracker]:https://github.com/balena-io-library/resin-rpi-raspbian/issues

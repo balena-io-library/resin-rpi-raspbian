@@ -31,6 +31,18 @@ ENV QEMU_CPU arm1176
 
 ONBUILD RUN echo $'WARNING: Systemd is not available on this base image! \nSystemd was included in Debian wheezy as a technology preview. Therefore, we do not install systemd on wheezy images and INITSYSTEM will not work.'
 
+RUN mkdir -p /.resin && echo $'\n\
+ __      ___   ___ _  _ ___ _  _  ___ \n\
+ \ \    / /_\ | _ \ \| |_ _| \| |/ __|\n\
+  \ \/\/ / _ \|   / .` || || .` | (_ |\n\
+   \_/\_/_/ \_\_|_\_|\_|___|_|\_|\___|\n\
+======================================\n\
+resin base images have been deprecated\n\
+in favour of the new balenalib images,\n\
+read more about it in our docs:\n\
+https://www.balena.io/docs/reference/base-images/base-images/\n\
+======================================' > /.resin/deprecation-warning
 
+ONBUILD RUN cat /.resin/deprecation-warning
 
 ENTRYPOINT ["/usr/bin/entry.sh"]

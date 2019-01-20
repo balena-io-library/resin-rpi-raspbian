@@ -206,7 +206,7 @@ fi
 	if [ $suite != 'buster' ]; then
 		# Raspberry PI Org doesn't have buster yet.
 		echo "deb http://archive.raspberrypi.org/debian $suite main" >>  "$rootfsDir/etc/apt/sources.list.d/raspi.list"
-		chroot "$rootfsDir" bash -c 'sudo apt-key adv --keyserver pgp.mit.edu  --recv-key 0x82B129927FA3303E'
+		chroot "$rootfsDir" bash -c 'sudo apt-key adv --batch --keyserver ha.pool.sks-keyservers.net  --recv-key 0x82B129927FA3303E'
 	fi
 	mkdir "$rootfsDir/var/lib/apt/lists/partial" # Lucid... "E: Lists directory /var/lib/apt/lists/partial is missing."
 )

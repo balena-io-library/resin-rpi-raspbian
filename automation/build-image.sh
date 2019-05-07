@@ -10,7 +10,7 @@ RESIN_XBUILD_SHA256='1eb099bc3176ed078aa93bd5852dbab9219738d16434c87fc9af4993684
 MIRROR='http://archive.raspbian.org/raspbian'
 
 # Download QEMU
-curl -SLO https://github.com/resin-io/qemu/releases/download/v3.0.0+resin/qemu-$QEMU_VERSION.tar.gz \
+curl -SLO https://github.com/balena-io/qemu/releases/download/v4.0.0-balena/qemu-$QEMU_VERSION.tar.gz \
 	&& echo "$QEMU_SHA256  qemu-$QEMU_VERSION.tar.gz" > qemu-$QEMU_VERSION.tar.gz.sha256sum \
 	&& sha256sum -c qemu-$QEMU_VERSION.tar.gz.sha256sum \
 	&& tar -xz --strip-components=1 -f qemu-$QEMU_VERSION.tar.gz

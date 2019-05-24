@@ -9,4 +9,4 @@ mkdir -p $dir/rootfs/usr/bin
 cp qemu-arm-static resin-xbuild $dir/rootfs/usr/bin
 chmod +x $dir/rootfs/usr/bin/qemu-arm-static
 	
-./mkimage.sh -t $REPO:$SUITE --dir=$dir debootstrap --foreign --variant=minbase --keyring=/root/.gnupg/pubring.gpg --arch=armhf --include=sudo,ca-certificates,dirmngr,netbase,curl,procps $SUITE $MIRROR
+./mkimage.sh -t $REPO:$SUITE --dir=$dir debootstrap --foreign --variant=minbase --keyring=/root/.gnupg/pubring.gpg --arch=armhf --include=sudo,ca-certificates,dirmngr,netbase,curl,procps,libraspberrypi-bin $SUITE $MIRROR

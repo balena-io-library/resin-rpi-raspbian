@@ -43,4 +43,6 @@ done\n\
 rm -r /var/lib/apt/lists/*' > /usr/sbin/install_packages \
   && chmod 0755 "/usr/sbin/install_packages"
 
+RUN install_packages libraspberrypi-bin
+
 ENTRYPOINT ["/usr/bin/entry.sh"]

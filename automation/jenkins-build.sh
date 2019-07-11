@@ -5,7 +5,7 @@ set -o pipefail
 
 export SUITES='jessie stretch buster'
 export REPO='balenalib/rpi-raspbian'
-LATEST='stretch'
+LATEST='buster'
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 date=$(date +'%Y%m%d' -u)
 

@@ -5,6 +5,8 @@ COPY 01_buildconfig /etc/apt/apt.conf.d/
 COPY entry.sh /usr/bin/entry.sh
 
 RUN mkdir -p /usr/share/man/man1
+RUN ln -s resin-xbuild /usr/bin/cross-build-start \
+  && ln -s resin-xbuild /usr/bin/cross-build-end
 
 ENV LC_ALL C.UTF-8
 ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -12,8 +14,8 @@ ENV DEBIAN_FRONTEND noninteractive
 # For backward compatibility, udev is enabled by default
 ENV UDEV off
 LABEL io.balena.architecture="rpi" \
-	  io.balena.qemu.version="$RESIN_QEMU_VERSION" \
-	  io.balena.device-type="raspberrypi"
+  io.balena.qemu.version="$RESIN_QEMU_VERSION" \
+  io.balena.device-type="raspberrypi"
 
 ENV QEMU_CPU arm1176
 

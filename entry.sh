@@ -1,14 +1,15 @@
 #!/bin/bash
 
 # This command only works in privileged container
-ip link add dummy0 type dummy &> /dev/null
-if [[ $? == 0 ]]; then
+tmp_mount='/tmp/_balena'
+mkdir -p "$tmp_mount"
+if mount -t devtmpfs none "$tmp_mount" &> /dev/null; then
 	PRIVILEGED=true
-	# clean the dummy0 link
-	ip link delete dummy0 &> /dev/null
+	umount "$tmp_mount"
 else
 	PRIVILEGED=false
 fi
+rm -rf "$tmp_mount"
 
 function mount_dev()
 {

@@ -3,8 +3,8 @@
 set -o errexit
 set -o pipefail
 
-QEMU_VERSION='4.0.0-balena-arm'
-QEMU_SHA256='0cfb91a6afd0a796e1391f2b7a459be2ef7f86da3e05d5da16e8e9546e496b29'
+QEMU_VERSION='4.0.0-balena2-arm'
+QEMU_SHA256='ae0144b8b803ddb8620b7e6d5fd68e699a97e0e9c523d283ad54fcabc0e615f8'
 RESIN_XBUILD_VERSION='1.0.0'
 RESIN_XBUILD_SHA256='1eb099bc3176ed078aa93bd5852dbab9219738d16434c87fc9af499368423437'
 MIRROR='http://archive.raspbian.org/raspbian'

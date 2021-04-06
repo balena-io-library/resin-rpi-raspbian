@@ -26,13 +26,14 @@ for suite in $SUITES; do
 
 	rm -rf output
 	mkdir -p output
+
 	docker run --rm --privileged	-e REPO=$REPO \
 									-e SUITE=$suite \
 									-e MIRROR=$MIRROR \
-									-e RESIN_QEMU_VERSION=$QEMU_VERSION \
+									-e RESIN_QEMU_VERSION=$QEMU_RELEASE \
 									-v `pwd`/output:/output raspbian-mkimage
 
-	docker build -t $REPO:$suite output/
+	docker build -t $REPO:$suite --platform=linux/arm/v6 output/
 done
 
 rm -rf qemu* resin-xbuild

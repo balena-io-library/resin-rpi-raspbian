@@ -13,13 +13,14 @@ bash "$dir/build-image.sh"
 for suite in $SUITES; do
 
 	docker tag $REPO:$suite $REPO:$suite-$date
+	docker push $REPO:$suite
+	docker push $REPO:$suite-$date
 
 	if [ $LATEST == $suite ]; then
 		docker tag $REPO:$suite $REPO:latest
+		docker push $REPO:latest
 	fi
 done
-
-docker push $REPO
 
 # Clean up unnecessarry docker images after pushing
 if [ $? -eq 0 ]; then

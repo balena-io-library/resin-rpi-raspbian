@@ -47,4 +47,6 @@ rm -r /var/lib/apt/lists/*' > /usr/sbin/install_packages \
 
 RUN install_packages libraspberrypi-bin
 
+RUN update-ca-certificates -f
+
 ENTRYPOINT ["/usr/bin/entry.sh"]

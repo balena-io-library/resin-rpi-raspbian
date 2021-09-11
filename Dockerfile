@@ -1,11 +1,11 @@
-FROM debian:jessie
+FROM debian:bullseye
 
 RUN apt-get -q update \
 	&& apt-get -qy install \
 		curl \
 		debootstrap \
-		python \
-		python-pip \
+		python3 \
+		python3-pip \
 		ca-certificates \
 	&& rm -rf /var/lib/apt/lists/*
 

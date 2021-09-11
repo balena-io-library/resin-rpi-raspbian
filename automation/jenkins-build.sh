@@ -3,9 +3,9 @@
 set -o errexit
 set -o pipefail
 
-export SUITES='stretch buster bullseye'
+export SUITES='stretch buster bullseye bookworm'
 export REPO='balenalib/rpi-raspbian'
-LATEST='buster'
+LATEST='bullseye'
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 date=$(date +'%Y%m%d' -u)
 

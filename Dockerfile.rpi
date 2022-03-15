@@ -45,7 +45,7 @@ done\n\
 rm -r /var/lib/apt/lists/*' > /usr/sbin/install_packages \
   && chmod 0755 "/usr/sbin/install_packages"
 
-RUN install_packages libraspberrypi-bin
+RUN install_packages libraspberrypi-bin udev
 
 RUN update-ca-certificates -f
 

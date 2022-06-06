@@ -3,9 +3,9 @@
 set -o errexit
 set -o pipefail
 
-QEMU_RELEASE='6.0.0+balena1'
+QEMU_RELEASE='7.0.0+balena1'
 QEMU_ASSET="qemu-${QEMU_RELEASE/+/.}-arm.tar.gz"
-QEMU_SHA256='359c30fb422a18766642cdc634d575ca2d0b6d6d58bda0ec2e33b425c508194c'
+QEMU_SHA256='f58b82bb7db9a6888bcd6b0ba8152ad7a3986810b82ccccd37f7b5c1f1deaab4'
 RESIN_XBUILD_VERSION='1.0.0'
 RESIN_XBUILD_SHA256='1eb099bc3176ed078aa93bd5852dbab9219738d16434c87fc9af499368423437'
 MIRROR='http://archive.raspbian.org/raspbian'

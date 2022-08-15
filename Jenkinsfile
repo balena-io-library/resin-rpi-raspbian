@@ -19,22 +19,23 @@ pipeline {
         credentials credentialType: 'com.cloudbees.jenkins.plugins.credentialsbinding.MultiBinding', defaultValue: '3204255f-7677-4681-9f06-b4a2f804e2a2', description: 'DOCKERHUB CREDENTIALS', name: 'DOCKERHUB_CREDENTIALS', required: true
     }
 
-    stage('scm') {
-        steps {
-            checkout([
-                $class: 'GitSCM',
-                branches: [[name: '*/${GIT_BRANCH}']],
-                doGenerateSubmoduleConfigurations: false,
-                extensions: [],
-                submoduleCfg: [],
-                userRemoteConfigs: [[
-                    credentialsId: GIT_CREDENTIALS, 
-                    url: GIT_URL
-                ]
-            ]])
-        }
-    }
     stages {
+        stage('scm') {
+            steps {
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: '*/${GIT_BRANCH}']],
+                    doGenerateSubmoduleConfigurations: false,
+                    extensions: [],
+                    submoduleCfg: [],
+                    userRemoteConfigs: [[
+                        credentialsId: GIT_CREDENTIALS, 
+                        url: GIT_URL
+                    ]
+                ]])
+            }
+        }
+
         stage('build') {
             steps {
                 withCredentials([
